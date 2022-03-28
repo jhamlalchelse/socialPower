@@ -27,10 +27,8 @@ urlpatterns = [
     path('deletefolloweruser/<int:userfwid>/<int:pk>',views.deletefolloweruser, name='deletefolloweruser'),
     path('searchuser/',views.searchuser, name='searchuser'),
     path('searchfollow/<int:userfwid>/<int:pk>',views.searchfollow, name='searchfollow'),
-
     path('userfollower/<int:pk>',views.userfollower, name='userfollower'),
     path('userfollowing/<int:pk>',views.userfollowing, name='userfollowing'),
-
     path('userfollow/<int:userfwid>/<int:pk>',views.userfollow, name='userfollow'),
     path('userunfollow/<int:userfwid>/<int:pk>',views.userunfollow, name='userunfollow'),
     path('userfollowinfollower/<int:userfwid>/<int:pk>',views.userfollowinfollower, name='userfollowinfollower'),
