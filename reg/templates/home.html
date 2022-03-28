@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block main-content %}
+{% comment %} Start User Section {% endcomment %}
+<section class="txtgeorgia mt-3">
+    <div class="post-section-container col-sm-8 offset-sm-2">
+        <h4 class="text-center ">USERS</h4>
+        <hr class="col-sm-4 offset-sm-4">
+        <div class="row row-cols-1 row-cols-md-5 g-4 ">
+            {% for user in users %}
+            {% if request.user == user %}
+            {% else %}
+            <div class="col text-center ">
+              <div class="card h-100 bg-secondary bg-opacity-50">
+                <a href = "{% url 'userprofile' user.id %}" class=" text-dark text-decoration-none mx-3 text-center">
+                <img src={% static 'images/profilelogo.jpg' %} class="card-img-top user-img-profile-show d-block m-auto mt-3" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{user.username}}</h5>
+                </div>
+                 </a>
+                 <div class="cart-body-btn">
+                    {% if user.id in fwingid%}
+                    <form action="" method="get">
+                        <a href="{% url 'unfollow' user.id %}" class="btn btn-primary">Unfollow</a>
+                    </form>
+                    {% else %}
+                    <form action="" method="get">
+                        <a href="{% url 'follow' user.id %}" class="btn btn-primary">Follow</a>
+                    </form>
+                    {% endif %}
+                 </div>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+    </div>
+</section>
+{% comment %} End User Section {% endcomment %}
+{% endblock %}
+
+

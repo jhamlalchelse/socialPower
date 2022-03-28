@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}SEARCH USER{% endblock title %}
+{% block main-content %}
+<form action="" method="post" class="d-flex justify-content-center mt-2">
+{% csrf_token %}
+  <input class="form-control me-2 w-25" name="search"  type="search" placeholder="Search" aria-label="Search">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+<hr>
+
+<form action="" method="get">
+  <section>
+    <div class="post-section-container col-sm-8 offset-sm-2">
+      <h4 class="text-center pt-3 textfamily">SEARCH USER</h4>
+      <hr class="col-sm-8 offset-sm-2">
+      <div class="row row-cols-1 row-cols-md-4 g-4 txtgeorgia">
+      {% for user in searchlists %}
+      <div class="col text-center">
+      <div class="card h-100 bg-secondary bg-opacity-50">
+        {% if user.id in userid %}
+        <a href={% url 'userprofile' user.id %} class="text-decoration-none text-black">
+        <img src={% static 'images/profilelogo.jpg' %} class="card-img-top user-img-profile-show d-block m-auto mt-3" alt="...">
+         <div class="card-body">
+            <h5 class="card-title">{{user.username}}</h5>
+          </div>
+         </a>
+         {% else %}
+         <a href={% url 'userprofile' user.id %} class="text-decoration-none text-black">
+         <img src={% static 'images/profilelogo.jpg' %} class="card-img-top user-img-profile-show d-block m-auto mt-3" alt="...">
+         <div class="card-body">
+          <h5 class="card-title">{{user.username}}</h5>
+        </div>
+       </a>
+        <div class="cardbodyserachf">
+          <a href={% url 'searchfollow' request.user.id user.id %} class="btn btn-primary px-4 ">Follow</a>
+        </div>
+        {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+      </div>
+    </div>
+  </section>
+</form>
+{% endblock %}

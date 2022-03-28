@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}MY PROFILE{% endblock title %}
+{% block main-content %}
+<div style="font-family:'Georgia';" class="bg-dark bg-opacity-10">
+
+{% comment %} profile-section {% endcomment %}
+    <section>
+        <div class="profile-section-container col-sm-8 offset-sm-2 pt-5 d-flex">
+            <div class="col-sm-5">
+                <img src= {% static 'images/profilelogo.jpg' %} alt="" class="profile-section-icon">
+            </div>
+            <div class="profile-section-info col-sm-5 px-5 pt-3">
+                <h4>{{request.user}}</h4>
+                <div class="d-flex justify-content-between align-items-center profile-section-info-body pt-3">
+                    {% if  posts%}
+                    <a href="{% url 'mypost' %}" class="text-decoration-none text-black">
+                        {% for post in posts %}
+                            {% if forloop.last %}
+                                <h5> <span class="pb-2">{{forloop.counter}}</span> Post</h5>
+                            {% endif %}
+                        {% endfor %}
+                    <a>
+                    {% else %}
+                        <h5> <span>0</span> Post</h5>
+                    {% endif %}
+                    {% if  followers%}
+                    {% for follower in followers %}
+                    <a href="{% url 'follower' request.user.id %}" class="text-decoration-none text-black">
+                    {% if forloop.last %}
+                    <h5> <span>{{forloop.counter}}</span> Follower</h5>
+                     </a>
+                    {% else %} 
+                    {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    <h5> <span>0</span> Follower</h5>
+                    {% endif %}
+                    {% if followings %}
+                    {% for following in followings %}
+                    <a href={% url 'following' request.user.id %} class="text-decoration-none text-black">
+                    {% if forloop.last %}
+                    <h5> <span>{{forloop.counter}}</span> Following</h5>
+                    {% endif %}
+                    </a>
+                    {% endfor %}
+                    {% else %}
+                    <h5><span>0</span> Following</h5>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% comment %} End profile-section {% endcomment %}
+
+{% comment %} Start Post Section {% endcomment %}
+    <section class="mt-5">
+        <div class="post-section-container col-sm-8 offset-sm-2">
+                <h4 class="text-center">POSTS</h4>
+                <hr class="col-sm-4 offset-sm-4">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    {% for post in posts %}
+                    <div class="col">
+                      <div class="card h-100">
+                            <a href="{% url 'mypostdetail' post.id %}" class="text-decoration-none text-dark">
+                                <img src={{post.post_image.url}} class="card-img-top" alt="..." style="height: 18rem;">
+                            </a>
+                      </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+        </div>
+    </section>
+{% comment %} End Post Section {% endcomment %}
+
+<hr>
+{% comment %} Start User Section {% endcomment %}
+<section>
+    <div class="post-section-container col-sm-8 offset-sm-2">
+        <h4 class="text-center">USERS</h4>
+        <hr class="col-sm-4 offset-sm-4">
+        <div class="row row-cols-1 row-cols-md-5 g-4 ">
+            {% for user in users %}
+            {% if request.user == user %}
+            {% else %}
+            <div class="col text-center ">
+              <div class="card h-100 bg-secondary bg-opacity-50">
+                <a href = "{% url 'userprofile' user.id %}" class=" text-dark text-decoration-none mx-3 text-center">
+                <img src={% static 'images/profilelogo.jpg' %} class="card-img-top user-img-profile-show d-block m-auto mt-3" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{user.username}}</h5>
+                </div>
+                 </a>
+                 <div class="cart-body-btn">
+                    {% if user.id in fwingid%}
+                    <form action="" method="get">
+                        <a href="{% url 'unfollow' user.id %}" class="btn btn-primary">Unfollow</a>
+                    </form>
+                    {% else %}
+                    <form action="" method="get">
+                        <a href="{% url 'follow' user.id %}" class="btn btn-primary">Follow</a>
+                    </form>
+                    {% endif %}
+                 </div>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+    </div>
+</section>
+{% comment %} End User Section {% endcomment %}
+{% endblock main-content %}

@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+.navbar-brand-icon{
+    font-size: 1.7rem;
+    color: crimson;
+    margin-left: 20rem !important;
+}
+.dropdown-profile{
+    margin: 0 20vmax 0 1vmax;
+}
+.dropdown-profile-img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.dropdown-profile-margin{
+    margin-left: -0.7vmax;
+}
+.profile-section-icon{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+}
+.profile-section-info-body{
+    font-family: 'Times New Roman', Times, serif;
+}
+.user-img-profile-show{
+    border-radius: 50%;
+    height: 7vmax;
+    width: 7vmax;
+}
+.cart-body-btn{
+    margin: -0.5vmax 0 0.8vmax;
+}
+.textfamily{
+    font-family: 'Times New Roman', Times, serif;
+}
+.bgcolorin100vh{
+    height: 92vh;
+}
+.txtgeorgia{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.margintopinfollower{
+    margin-top: -1vmax;
+}
+.cardbodyserachf{
+    margin: -1.2vmax 0 0.7vmax 0;
+}

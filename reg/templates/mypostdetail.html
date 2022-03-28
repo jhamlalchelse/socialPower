@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}POST DETAILS{% endblock title %}
+{% block main-content %}
+<section class="bgcolorin100vh bg-secondary">
+  <div class="post-section-container col-sm-4 offset-sm-4">
+    <h4 class="text-center pt-3 textfamily">POST DETAILS</h4>
+    <hr class="col-sm-4 offset-sm-4">
+    {% for post in postd %}
+    <div class="card h-100 bg-secondary bg-opacity-10">
+          <img src={{post.post_image.url}} class="card-img-top" alt="..." style="height: 18rem;">
+      <div class="card-body">
+        <p class="card-text">{{post.desc}}</p>
+        {% for comnt in comnts %}
+        <div class="d-flex">
+        <p>@{{comnt.user}}</p>
+        <p class="ms-3">{{comnt.comment}}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock main-content %}
