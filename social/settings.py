@@ -119,7 +119,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = "staticfile"
+STATIC_ROOT = "social"
 # STATIC_ROOT = os.path.join(BASE_DIR,'staticfile')
  
 # Default primary key field type
