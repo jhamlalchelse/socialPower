@@ -36,7 +36,7 @@ urlpatterns = [
     path('userfollowinfollower/<int:userfwid>/<int:pk>',views.userfollowinfollower, name='userfollowinfollower'),
     path('userunfollowinfollower/<int:userfwid>/<int:pk>',views.userunfollowinfollower, name='userunfollowinfollower'),
     path('addpost/',views.addpost, name='addpost'),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 if settings.DEBUG:
