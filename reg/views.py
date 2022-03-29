@@ -1,4 +1,4 @@
-from urllib import request
+from timeit import repeat
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .forms import *
@@ -18,9 +18,26 @@ def home(request):
             if i == request.user:
                 following = FollowingModel.objects.filter(fwinguserid=i.id)
     fwingid = [p.user.id for p in following]
+    for usr in user:
+        if usr == request.user:
+            followinguser = FollowingModel.objects.filter(fwinguserid=usr.id)
+            followeruser = FollowerModel.objects.filter(fweruserid=usr.id)
+            fwinguser = [p.user.id for p in followinguser]
+            fweruser = [p.user.id for p in followeruser]
+    userid = list(set(fwinguser).union(set(fweruser)))
+    C = []
+    D = []
+    for i in userid:
+        followinguser = FollowingModel.objects.filter(fwinguserid=i)
+        followeruser = FollowerModel.objects.filter(fweruserid=i)
+        C = C + [p.user.id for p in followinguser]
+        D = D + [p.user.id for p in followeruser]
+    E = C + D + userid
+    mutualuserid= sorted(list(dict.fromkeys(E)))
     data = {
         'users':user,
         'fwingid': fwingid,
+        'mutualuserid':mutualuserid,
     }
     return render(request,'home.html',data)
 

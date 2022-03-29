@@ -35,6 +35,45 @@
             {% endif %}
             {% endfor %}
           </div>
+
+          {% comment %} <hr>
+          <h4 class="text-center ">MUTUAL USERS</h4>
+          <hr class="col-sm-4 offset-sm-4"> {% endcomment %}
+          <h4 class="text-center mt-5">MUTUAL USERS</h4>
+          <hr class="col-sm-4 offset-sm-4">
+          <div class="row row-cols-1 row-cols-md-5 g-4 ">
+              {% for user in users %}
+              {% if request.user == user %}
+              {% else %}
+              {% if user.id in mutualuserid %}
+              <div class="col text-center ">
+                <div class="card h-100 bg-secondary bg-opacity-50">
+                  <a href = "{% url 'userprofile' user.id %}" class=" text-dark text-decoration-none mx-3 text-center">
+                  <img src={% static 'images/profilelogo.jpg' %} class="card-img-top user-img-profile-show d-block m-auto mt-3" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{user.username}}</h5>
+                  </div>
+                   </a>
+                   <div class="cart-body-btn">
+                      {% if user.id in fwingid%}
+                      <form action="" method="get">
+                          <a href="{% url 'unfollow' user.id %}" class="btn btn-primary">Unfollow</a>
+                      </form>
+                      {% else %}
+                      <form action="" method="get">
+                          <a href="{% url 'follow' user.id %}" class="btn btn-primary">Follow</a>
+                      </form>
+                      {% endif %}
+                   </div>
+                </div>
+              </div>
+              {% endif %}
+              {% endif %}
+              {% endfor %}
+            </div>
+
+
+
     </div>
 </section>
 {% comment %} End User Section {% endcomment %}
