@@ -3,7 +3,7 @@
 {% block title %}Home{% endblock title %}
 {% block main-content %}
 {% comment %} Start User Section {% endcomment %}
-{% comment %} <section class="txtgeorgia mt-3">
+<section class="txtgeorgia mt-3">
     <div class="post-section-container col-sm-8 offset-sm-2">
         <h4 class="text-center ">USERS</h4>
         <hr class="col-sm-4 offset-sm-4">
@@ -34,14 +34,8 @@
             </div>
             {% endif %}
             {% endfor %}
-          </div> {% endcomment %}
-
-          {% comment %} <hr>
-          <h4 class="text-center ">MUTUAL USERS</h4>
-          <hr class="col-sm-4 offset-sm-4"> {% endcomment %}
-
-          
-          {% comment %} <h4 class="text-center mt-5">MUTUAL USERS</h4>
+          </div>
+        <h4 class="text-center mt-5">MUTUAL USERS</h4>
           <hr class="col-sm-4 offset-sm-4">
           <div class="row row-cols-1 row-cols-md-5 g-4 ">
               {% for user in users %}
@@ -72,14 +66,10 @@
               {% endif %}
               {% endif %}
               {% endfor %}
-            </div> {% endcomment %}
-
-
-
-    {% comment %} </div>
-</section> {% endcomment %}
+            </div>
+    </div>
+</section>
 {% comment %} End User Section {% endcomment %}
-<p>Home</p>
 {% endblock %}
 
 
