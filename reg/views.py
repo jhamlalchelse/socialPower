@@ -9,8 +9,10 @@ from .models import *
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
+@csrf_exempt
 @login_required(login_url='/account/login/')  
 def home(request):
     user = User.objects.all()
@@ -41,6 +43,7 @@ def home(request):
     }
     return render(request,'home.html',data)
 
+@csrf_exempt
 class CustomerRegistrationView(View):
     def get(self, request):
         form = UserRegistrationForms()
@@ -52,6 +55,7 @@ class CustomerRegistrationView(View):
             form.save()
         return redirect('login')
 
+@csrf_exempt
 @method_decorator(login_required(login_url='/account/login/'), name='dispatch')
 class ProfileView(View):
     def get(self,request):
@@ -101,6 +105,7 @@ def userpost(request,pk):
     }
     return render(request, 'userpost.html',data)
 
+@csrf_exempt
 @login_required(login_url='/account/login/')  
 def userpostdetail(request, pk):
     postd = PostDetail.objects.filter(id=pk)
@@ -203,6 +208,7 @@ def deletefolloweruser(request, pk, userfwid=None):
                     FollowingModel.objects.filter(Q(user=fuser) & Q(fwinguserid= pk)).delete()
             return redirect('follower',userfwid)
 
+@csrf_exempt
 @login_required(login_url='/account/login/')  
 def searchuser(request):
     following = FollowingModel.objects.filter(fwinguserid=request.user.id)
@@ -327,6 +333,7 @@ def userunfollowinfollower(request, pk, userfwid):
             FollowingModel.objects.filter(Q(user=user) & Q(fwinguserid= request.user.id)).delete()
         return redirect('userfollower',userfwid)
 
+@csrf_exempt
 @login_required(login_url='/account/login/')  
 def addpost(request):
     if request.method == 'POST':
