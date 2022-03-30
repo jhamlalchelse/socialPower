@@ -12,39 +12,36 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-@csrf_exempt
-@login_required(login_url='/account/login/')  
+# @csrf_exempt
+# @login_required(login_url='/account/login/')  
 def home(request):
-    if request.method == "GET":
-        user = User.objects.all()
-        for i in user:
-                if i == request.user:
-                    following = FollowingModel.objects.filter(fwinguserid=i.id)
-        fwingid = [p.user.id for p in following]
-        # for usr in user:
-        #     if usr == request.user:
-        #         followinguser = FollowingModel.objects.filter(fwinguserid=usr.id)
-        #         followeruser = FollowerModel.objects.filter(fweruserid=usr.id)
-        #         fwinguser = [p.user.id for p in followinguser]
-        #         fweruser = [p.user.id for p in followeruser]
-        # userid = list(set(fwinguser).union(set(fweruser)))
-        # C = []
-        # D = []
-        # for i in userid:
-        #     followinguser = FollowingModel.objects.filter(fwinguserid=i)
-        #     followeruser = FollowerModel.objects.filter(fweruserid=i)
-        #     C = C + [p.user.id for p in followinguser]
-        #     D = D + [p.user.id for p in followeruser]
-        # E = C + D + userid
-        # mutualuserid= sorted(list(dict.fromkeys(E)))
-        data = {
-            'users':user,
-            'fwingid': fwingid,
-            # 'mutualuserid':mutualuserid,
-        }
-        return render(request,'home.html',data)
-    else:
-        return HttpResponse('Page Working')
+    # user = User.objects.all()
+    # for i in user:
+    #         if i == request.user:
+    #             following = FollowingModel.objects.filter(fwinguserid=i.id)
+    # fwingid = [p.user.id for p in following]
+    # for usr in user:
+    #     if usr == request.user:
+    #         followinguser = FollowingModel.objects.filter(fwinguserid=usr.id)
+    #         followeruser = FollowerModel.objects.filter(fweruserid=usr.id)
+    #         fwinguser = [p.user.id for p in followinguser]
+    #         fweruser = [p.user.id for p in followeruser]
+    # userid = list(set(fwinguser).union(set(fweruser)))
+    # C = []
+    # D = []
+    # for i in userid:
+    #     followinguser = FollowingModel.objects.filter(fwinguserid=i)
+    #     followeruser = FollowerModel.objects.filter(fweruserid=i)
+    #     C = C + [p.user.id for p in followinguser]
+    #     D = D + [p.user.id for p in followeruser]
+    # E = C + D + userid
+    # mutualuserid= sorted(list(dict.fromkeys(E)))
+    # data = {
+    #     'users':user,
+    #     'fwingid': fwingid,
+    #     # 'mutualuserid':mutualuserid,
+    # }
+    return render(request,'home.html')
 
 @csrf_exempt
 class CustomerRegistrationView(View):
