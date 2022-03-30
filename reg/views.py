@@ -42,41 +42,37 @@ def home(request):
     }
     return render(request,'home.html')
 
-# @csrf_exempt
-# class CustomerRegistrationView(View):
-#     def get(self, request):
-#         form = UserRegistrationForms()
-#         return render(request, 'registration.html',{'forms':form})
-#     def post(self,request):
-#         form = UserRegistrationForms(request.POST)
-#         if form.is_valid():
-#             messages.success(request,'Congratulation!! Registration Successfully')
-#             form.save()
-#         return redirect('login')
+@csrf_exempt
+class CustomerRegistrationView(View):
+    def get(self, request):
+        form = UserRegistrationForms()
+        return render(request, 'registration.html',{'forms':form})
+    def post(self,request):
+        form = UserRegistrationForms(request.POST)
+        if form.is_valid():
+            messages.success(request,'Congratulation!! Registration Successfully')
+            form.save()
+        return redirect('login')
 
-# @csrf_exempt
-# @method_decorator(login_required(login_url='/account/login/'), name='dispatch')
-# class ProfileView(View):
-#     def get(self,request):
-#         user = User.objects.all()
-#         post = PostDetail.objects.filter(user=request.user)
-#         for i in user:
-#             if i == request.user:
-#                 following = FollowingModel.objects.filter(fwinguserid=i.id)
-#                 follower = FollowerModel.objects.filter(fweruserid=i.id)
-#         fwingid = [p.user.id for p in following]
-#         data = {
-#             'users':user,
-#             'posts':post,
-#             'followers':follower,
-#             'followings':following,
-#             'fwingid': fwingid,
-#         }
-#         return render(request, 'myprofile.html',data)
-
-def myprofile(request):
-    return HttpResponse('My Profile')
-
+@csrf_exempt
+@method_decorator(login_required(login_url='/account/login/'), name='dispatch')
+class ProfileView(View):
+    def get(self,request):
+        user = User.objects.all()
+        post = PostDetail.objects.filter(user=request.user)
+        for i in user:
+            if i == request.user:
+                following = FollowingModel.objects.filter(fwinguserid=i.id)
+                follower = FollowerModel.objects.filter(fweruserid=i.id)
+        fwingid = [p.user.id for p in following]
+        data = {
+            'users':user,
+            'posts':post,
+            'followers':follower,
+            'followings':following,
+            'fwingid': fwingid,
+        }
+        return render(request, 'myprofile.html',data)
 
 @login_required(login_url='/account/login/')  
 def userprofile(request,pk):
