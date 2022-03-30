@@ -1,4 +1,3 @@
-from timeit import repeat
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .forms import *
