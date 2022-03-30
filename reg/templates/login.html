@@ -19,7 +19,7 @@
        <br>
       <input type="submit" value="Submit" class="btn btn-secondary mt-3">
       <div class="text-center text-primary fw-bold">
-        <small>Don't have an account? <a href=" {% url 'registration' %}" class="text-danger">Create an Account</a></small>
+        {% comment %} <small>Don't have an account? <a href=" {% url 'registration' %}" class="text-danger">Create an Account</a></small> {% endcomment %}
         {% if form.non_field_errors %}
         {% for error in form.non_field_errors %}
         <p class="alert alert-danger my-3">{{error}}</p>
