@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 @csrf_exempt
-@login_required(login_url='/account/login/')  
+# @login_required(login_url='/account/login/')  
 def home(request):
     user = User.objects.all()
     for i in user:
